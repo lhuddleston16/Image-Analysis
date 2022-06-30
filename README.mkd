@@ -8,8 +8,9 @@ One note about the main function `extract_chips_multi_point` in the python modul
 
 0. __Get data from Pachama.__
 
-`mkdir pachama_interview_data/`
-`gsutil -m cp -R gs://pachama-interview-data/* pachama_interview_data/`
+- `mkdir pachama_interview_data/`
+
+- `gsutil -m cp -R gs://pachama-interview-data/* pachama_interview_data/`
 
 
 1. __Create a virtual environment.__ The following command will create a vanilla python environment in a 'venv' directory. This directory will not be synced to github. Any required packages will be installed into this virtual environment.
