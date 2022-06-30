@@ -1,0 +1,9 @@
+/venv
+pachama/__pycache__
+*/__pycache__/*
+/.pytest_cache
+/tests/__pycache__
+/.ipynb_checkpoints
+/pachama-interview-data/*
+/pachama-interview-data/rasters/*
+/tests/test_data/test_raster/test_raster.tif
