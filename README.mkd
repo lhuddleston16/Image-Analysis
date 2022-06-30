@@ -1,0 +1,70 @@
+# Pachama
+Have you ever wanted to return arrays full of pixel values from a raster file? Ever thought with so many bands where do I even start? Well... Look no further, because that is actually the only thing this repo does! 
+
+One note about the main function `extract_chips_multi_point` in the python module `extract_chips` in relation to the instructions. The instructions were very specific about what the function should expect and return. I tweaked this definition slightly where the function returns a dictionary with each key representing a specific coordinate. The value of that key is a list of chips, one per year. Each chip is a numpy array of shape [6, 2*chip_size + 1, 2*chip_size + 1]. 
+
+
+## First Time Setup
+
+0. __Get data from Pachama.__
+
+`mkdir pachama_interview_data/`
+`gsutil -m cp -R gs://pachama-interview-data/* pachama_interview_data/`
+
+
+1. __Create a virtual environment.__ The following command will create a vanilla python environment in a 'venv' directory. This directory will not be synced to github. Any required packages will be installed into this virtual environment.
+
+`pachama>python -m venv venv`
+
+2. __Install required packages into the virtual environment.__ Packages that have been installed during development are captured in the 'pachama.requirements.txt' file. The following command will read this file and install all the required packages in your environment:
+
+`pachama>pip install -r requirements.txt`
+
+## Every Time Setup
+Before doing any development work, activate your virtual environment:
+
+`pachama> source < location-of-project >/venv/bin/activate`
+
+## Running PyTest
+The non-obvious inspector functions have companion tests in the __tests__ directory.
+
+You can run the tests with the following command:
+
+`~\pachama>python -m pytest tests\test.py`
+
+Youd can also build and see a test coverage report with the following commands:
+
+`~\pachama>coverage run -m pytest `
+## Adding Packages
+If you have to add a new package to support development, do the following.
+1. Ensure that existing required packages have been installed:
+
+`pachama>pip install -r requirements.txt`
+
+2. Update the requirements.txt file from your virtual environment:
+
+`pachama>pip freeze > requirements.txt`
+
+`pachama> coverage report`
+
+## Current Coverage
+raster_analysis/__init__.py            0      0   100%
+raster_analysis/extract_chips.py      41     10    76%
+tests/test_extract_chips.py           31      0   100%
+tests/test_validate_path.py           28      2    93%
+utilities/__init__.py                  0      0   100%
+utilities/validate_path.py            18      1    94%
+## Updating Sphinx Documentation (COMING SOON!)
+1. Navigate to docs folder:
+
+`~\docs>cd ~\pachama\docs`
+
+2. Generate api documentation:
+
+`~\docs>sphinx-apidoc -o source ..\pachama`
+
+3. Rebuild documentation
+
+`~\docs>make html`
+
+
