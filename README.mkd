@@ -3,6 +3,26 @@ Have you ever wanted to return arrays full of pixel values from a raster file? E
 
 One note about the main function `extract_chips_multi_point` in the python module `extract_chips` in relation to the instructions. The instructions were very specific about what the function should expect and return. I tweaked this definition slightly where the function returns a dictionary with each key representing a specific coordinate. The value of that key is a list of chips, one per year. Each chip is a numpy array of shape [6, 2*chip_size + 1, 2*chip_size + 1]. 
 
+# Questions 
+1. Informally describe the runtime and memory complexities of your solution as a function of: 
+
+- The number of raster files 
+- The number of coordinates 
+
+The runtime of my solution increases linearly as a function of the number of raster files. At a quick glance running over one tif file takes 4.5 seconds while running over 2 takes 7.5. Conceptually linear time makes makes sense as well since this function iterates over both tif images and coordinates. Unsure at this time if there are gains in efficiency as more rasters are added, but I doubt it based on the code. The number of points also appears to be a linear in terms of runtime, however it takes much less memory per unit as it efficiently creates a window in the raster file and only loads a small amount of data. This process could be made sub-linear if the code was structured to run concurrently and process multiple coordinates at a time.
+
+In terms of memory complexity - the big deal is the raster files, since as stated above as the number of coordinates increases the number only small portions of that file will be read. However it is my understanding that the raster file needs to be held in memory, unsure how the performance would be effected if you tried to hold more than one raster file in memory.
+
+2. What are the performance and scalability concerns with you solution? 
+
+The largest concern is that the method cannot gain efficiency by larger computational power or RAM. Its a simple for-loop that iterates over the coordinates and tif files, and so adding more horse power wouldn't gain very much in terms of efficiency. The process needs to be changes to be scalable so that multiple jobs can run concurrently so adding that additional RAM or compute will make a difference.  
+
+
+
+3. How would an ideal implementation change if you had to process 100x the number of rasters and/or coordinates? 
+ - Ideally a gpu instead of a CPU should be used. There is a blatent lack of concurreny in my method and using as mentioned in the bonus questions some process like dask would be beneficial. In addition this system should be set up in the cloud so that scalability is less of a concern in terms of ability and minimizing cost becomes the focus. Databricks, Sagemaker, GCP's Vertex or Azure ML Studio allow individuals to spin up GPU enabled clusters to run such large scale image and matrix operations. The way this could be done is to deploy a docker image unto those clusers.
+
+
 
 ## First Time Setup
 
@@ -54,7 +74,7 @@ tests/test_extract_chips.py           31      0   100%
 tests/test_validate_path.py           28      2    93%
 utilities/__init__.py                  0      0   100%
 utilities/validate_path.py            18      1    94%
-## Updating Sphinx Documentation (COMING SOON!)
+## Sphinx Documentation (COMING SOON!)
 1. Navigate to docs folder:
 
 `~\docs>cd ~\pachama\docs`
@@ -66,5 +86,6 @@ utilities/validate_path.py            18      1    94%
 3. Rebuild documentation
 
 `~\docs>make html`
+
 
 

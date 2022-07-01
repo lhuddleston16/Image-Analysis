@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import numpy as np
 from utilities.validate_path import validate_file_pathname
+import time
 
 
 # python -m raster_analysis.extract_chips
@@ -80,13 +81,15 @@ def extract_chips_multi_point(
 
 
 if __name__ == "__main__":
-    geo_json = "./tests/test_data/test_raster/test_coordinates.geojson"
-    raster_dir = "./tests/test_data/test_raster/"
-    chip_size = 4
+    geo_json = "./pachama-interview-data/coordinates.geojson"#"./tests/test_data/test_raster/test_coordinates.geojson"
+    raster_dir = "./pachama-interview-data/rasters"#"./tests/test_data/test_raster/"
+    chip_size = 1
+    start_time = time.time()
     test_run = extract_chips_multi_point(geo_json, raster_dir, chip_size)
+    print("--- %s seconds ---" % (time.time() - start_time))
     test_coordinate = (-74.79528902505427, 40.946807786177864)
-    print(f"Type of object returned: {type(test_run)}")
-    print(f"Type of object in dictionary: {type(test_run[test_coordinate])}")
-    print(f"Length of list: {len(test_run[test_coordinate])}")
-    print(f"Type item in list: {type(test_run[test_coordinate][0])}")
-    print(f"Shape array in list: {test_run[test_coordinate][0].shape}")
+    # print(f"Type of object returned: {type(test_run)}")
+    # print(f"Type of object in dictionary: {type(test_run[test_coordinate])}")
+    # print(f"Length of list: {len(test_run[test_coordinate])}")
+    # print(f"Type item in list: {type(test_run[test_coordinate][0])}")
+    # print(f"Shape array in list: {test_run[test_coordinate][0].shape}")
