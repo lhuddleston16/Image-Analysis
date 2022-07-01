@@ -73,12 +73,10 @@ If you have to add a new package to support development, do the following.
 `pachama> coverage report`
 
 ## Current Coverage
-- raster_analysis/__init__.py            0      0   100%
-- raster_analysis/extract_chips.py      41     10    76%
-- tests/test_extract_chips.py           31      0   100%
-- tests/test_validate_path.py           28      2    93%
-- utilities/__init__.py                  0      0   100%
-- utilities/validate_path.py            18      1    94%
+- raster_analysis/extract_chips.py: 76%
+- tests/test_extract_chips.py:      100%
+- tests/test_validate_path.py:      93%
+- utilities/validate_path.py:       94%
 ## Sphinx Documentation (COMING SOON!)
 1. Navigate to docs folder:
 
