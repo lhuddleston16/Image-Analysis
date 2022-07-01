@@ -16,10 +16,10 @@ def forbid_publish():
 forbid_publish()
 
 setup(
-    name="levi-huddleston-pachama",
+    name="pachama-test",
     version="0.0.1",
     description="A package to extract values from raster files.",
     author="Levi Huddleston",
-    packages=["levi-huddleston-pachama"],
-    url=None,
+    packages=["pachama-test"],
+    url="https://github.com/lhuddleston16/pachama_test",
 )
