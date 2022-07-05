@@ -13,7 +13,7 @@
 - The number of raster files 
 - The number of coordinates 
 
-The runtime of my solution increases linearly as a function of the number of raster files. At a quick glance running over one tif file takes 4.5 seconds while running over 2 takes 7.5. Conceptually linear time makes makes sense as well since this function iterates over both tif images and coordinates. Unsure at this time if there are gains in efficiency as more rasters are added, but I doubt it based on the code. The number of points also appears to be a linear in terms of runtime, however it takes much less memory per unit as it efficiently creates a window in the raster file and only loads a small amount of data. This process could be made sub-linear if the code was structured to run concurrently and process multiple coordinates at a time.
+The runtime of my solution increases linearly as a function of the number of raster files, but with the addition of the coordinates since it is a for loop in a for loop, this makes the algorithm O(n^2). At a quick glance running over one tif file takes 4.5 seconds while running over 2 takes 7.5. The number of points is also a linear in terms of runtime, however it takes much less memory per unit as it efficiently creates a window in the raster file and only loads a small amount of data. This process could be made more efficient if the code was structured to run concurrently and process multiple coordinates at a time.This could be done with the python's multiprocessing module and stripping the function of its for-loop.
 
 In terms of memory complexity - the big deal is the raster files, since as stated above as the number of coordinates increases the number only small portions of that file will be read. However it is my understanding that the raster file needs to be held in memory, unsure how the performance would be effected if you tried to hold more than one raster file in memory.
 
@@ -24,7 +24,7 @@ The largest concern is that the method cannot gain efficiency by larger computat
 
 
 3. How would an ideal implementation change if you had to process 100x the number of rasters and/or coordinates? 
- - Ideally a gpu instead of a CPU should be used. There is a blatent lack of concurreny in my method and using as mentioned in the bonus questions some process like dask would be beneficial. In addition this system should be set up in the cloud so that scalability is less of a concern in terms of ability and minimizing cost becomes the focus. Databricks, Sagemaker, GCP's Vertex or Azure ML Studio allow individuals to spin up GPU enabled clusters to run such large scale image and matrix operations. The way this could be done is to deploy a docker image unto those clusers.
+ - Ideally a GPU instead of a CPU should be used. There is a blatent lack of concurreny in my method and using as mentioned in the bonus questions some process like dask would be beneficial. In addition this system should be set up in the cloud so that scalability is less of a concern in terms of ability and minimizing cost becomes the focus. Databricks, Sagemaker, GCP's Vertex or Azure ML Studio allow individuals to spin up GPU enabled clusters to run such large scale image and matrix operations. 
 
 
 
