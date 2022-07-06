@@ -28,7 +28,27 @@ The largest concern is that the method cannot gain efficiency by larger computat
 
 
 
-## First Time Setup
+## Run and test with pip
+
+- run `pip install raster-analysis==0.1.0`
+- run the following in a python module and ensure data directories exist.
+```
+from raster_analysis.extract_chips import extract_chips_multi_point
+
+geo_json = "./pachama-interview-data/coordinates.geojson"
+raster_dir = "./pachama-interview-data/rasters/"
+chip_size = 4
+test_run = extract_chips_multi_point(geo_json, raster_dir, chip_size)
+test_coordinate = (-74.79528902505427, 40.946807786177864)
+print(f"Type of object returned: {type(test_run)}")
+print(f"Type of object in dictionary: {type(test_run[test_coordinate])}")
+print(f"Length of list: {len(test_run[test_coordinate])}")
+print(f"Type item in list: {type(test_run[test_coordinate][0])}")
+print(f"Shape array in list: {test_run[test_coordinate][0].shape}")
+
+```
+
+## First Time Setup to Build locally
 
 0. __Get data from Pachama.__
 
@@ -55,7 +75,7 @@ The non-obvious inspector functions have companion tests in the __tests__ direct
 
 You can run the tests with the following command:
 
-`~\pachama>python -m pytest tests\test.py`
+`~\pachama>python -m pytest`
 
 Youd can also build and see a test coverage report with the following commands:
 
