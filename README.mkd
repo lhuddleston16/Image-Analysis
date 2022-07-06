@@ -28,7 +28,7 @@ The largest concern is that the method cannot gain efficiency by larger computat
 
 
 
-## Run with pip
+## Run and test with pip
 
 - run `pip install raster-analysis==0.1.0`
 - run the following in a python module and ensure data directories exist.
