@@ -1,4 +1,4 @@
-# Raster Files
+# Image Analysis on raster files
 - Have you ever wanted to return arrays full of pixel values from a raster file? Ever thought with so many bands where do I even start? Well... Look no further, because that is actually the only thing this repo does! 
 
 - One note about the main function `extract_chips_multi_point` in the python module `extract_chips` in relation to the instructions. The instructions were very specific about what the function should expect and return. I tweaked this definition slightly where the function returns a dictionary with each key representing a specific coordinate. The value of that key is a list of chips, one per year. Each chip is a numpy array of shape [6, 2*chip_size + 1, 2*chip_size + 1]. 
